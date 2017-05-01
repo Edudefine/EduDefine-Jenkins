@@ -1,0 +1,53 @@
+@media only screen and (max-width: 1200px) {
+    .home-offer-pop-up-img{
+        width: 600px;
+        height: 400px;
+    }
+  }
+@media only screen and (max-width: 770px) {
+   .home-offer-pop-up-img{
+        width: 420px;
+        height: 300px;
+    }
+    
+}
+
+@media (max-width: 533px) {
+    .home-offer-pop-up-img{
+        width: 260px;
+        height: 200px;
+    }
+   }
+
+
+
+
+
+
+
+
+    <div id="offer-image-popup" class="fancybox" style="display:none;">
+        <a href="https://kidobotikz.com/shop" id="offer-image-close" target="_blank">
+            <img src="https://s3-us-west-2.amazonaws.com/kidobotikz.sproboticworks/master/assets/images/marketing/offer-poster/offer.jpg" class="home-offer-pop-up-img" />
+        </a>
+    </div>
+    
+    
+       <script type="text/javascript">
+        $(document).ready(function(){
+                        $.fancybox("#offer-image-popup");
+            $('#offer-image-close').on('click', function(event){
+                event.stopPropagation();
+                $.fancybox.close();
+            });
+                    });
+    </script>
+    
+           $(document).ready(function () {
+            $(".fancybox").fancybox({
+                width: '60%',
+                height: '60%',
+            });
+        });
+        
+        fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened
