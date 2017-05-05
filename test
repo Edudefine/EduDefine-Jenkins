@@ -10,7 +10,7 @@
         height: 300px;
     }
     
-}test
+}tested
 
 @media (max-width: 533px) {
     .home-offer-pop-up-img{
