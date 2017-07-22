@@ -63,8 +63,8 @@ gulp.task('blog',function(){
 	
 	return gulp.src('../EduDefineBlog/')
 		//.pipe(exec('cd <%= options.blogPath %>',options))
-		.pipe(exec('hexo <%= options.generateCommand %> --cwd <%= options.blogPath %>',options))
-		.pipe(exec('hexo <%= options.deployCommand %> --cwd <%= options.blogPath %>',options))
+		//.pipe(exec('hexo <%= options.generateCommand %> --cwd <%= options.blogPath %>',options))
+		.pipe(exec('hexo <%= options.deployCommand %>',options))
 		.pipe(exec.reporter(reportOptions));
 		
 });
@@ -390,7 +390,7 @@ gulp.task('default',['cacheClear','clean'], () =>
     'cleantempjs',
     ['html','images','copyfont','copyphp','copyimages','copymisc'],
     'copy',
-	'blog',  //blog related script
+	//'blog',  //blog related script
     'generate-service-worker'
   )
 );
