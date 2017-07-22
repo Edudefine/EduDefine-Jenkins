@@ -39,6 +39,37 @@ const reload = browserSync.reload;
 var rename = require('gulp-rename');
 var order = require('gulp-order');
 
+var exec = require('gulp-exec');
+
+
+// create blog
+
+gulp.task('blog',function(){
+	var options = {
+		continueOnError: false,
+		pipeStdout: true,
+		deployCommand: "deploy",
+		generateCommand: "generate",
+		blogPath: "../EduDefineBlog/"
+	};
+	
+	var reportOptions ={
+		err:true,
+		stderr:true,
+		stdout: true
+		
+		
+	};
+	
+	return gulp.src('../EduDefineBlog/')
+		//.pipe(exec('cd <%= options.blogPath %>',options))
+		.pipe(exec('hexo <%= options.generateCommand %> --cwd <%= options.blogPath %>',options))
+		.pipe(exec('hexo <%= options.deployCommand %> --cwd <%= options.blogPath %>',options))
+		.pipe(exec.reporter(reportOptions));
+		
+});
+
+
 // Lint JavaScript
 gulp.task('lint', () =>
   gulp.src(['app/scripts/**/*.js','app/assets/js/*.js','app/assets/**/*.js'])
@@ -359,7 +390,7 @@ gulp.task('default',['cacheClear','clean'], () =>
     'cleantempjs',
     ['html','images','copyfont','copyphp','copyimages','copymisc'],
     'copy',
-
+	'blog',  //blog related script
     'generate-service-worker'
   )
 );

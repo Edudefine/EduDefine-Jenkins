@@ -1,5 +1,8 @@
 runtime: php55
 api_version: 1
+threadsafe: true
+
+default_expiration: "30d"
 
 handlers:
 
@@ -9,8 +12,56 @@ handlers:
 - url: /index.html
   script: index.html
     
-- url: /blog.html
-  script: blog.html
+- url: /blog/
+  static_files: blog/index.html
+  upload: blog/index.html
+  expiration: "15m"
+  
+- url: /blog/(.*\.js)
+  mime_type: text/javascript
+  static_files: blog/\1
+  upload: blog/(.*\.js)
+ 
+- url: /blog/(.*\.css)
+  mime_type: text/css
+  static_files: blog/\1
+  upload: blog/(.*\.css)
+      
+# image files
+- url: /blog/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+  static_files: blog/\1
+  upload: blog/(.*\.(bmp|gif|ico|jpeg|jpg|png))
+
+- url: /blog/(.*\.woff)
+  mime_type: application/x-font-woff
+  static_files: blog/\1
+  upload: blog/(.*\.woff)
+      
+- url: /blog/(.*\.eot)
+  mime_type: application/vnd.ms-fontobject
+  static_files: blog/\1
+  upload: blog/(.*\.eot)
+ 
+- url: /blog/(.*\.otf)
+  mime_type: font/opentype
+  static_files: blog/\1
+  upload: blog/(.*\.otf)   
+  
+- url: /blog/(.*\.ttf)
+  mime_type: font/truetype
+  static_files: blog/\1
+  upload: blog/(.*\.ttf)
+         
+# index files
+- url: /blog/(.+)/
+  static_files: blog/\1/index.html
+  upload: blog/(.+)/index.html
+  expiration: "15m"
+
+- url: /blog/(.+)
+  static_files: blog/\1/index.html
+  upload: blog/(.+)/index.html
+  expiration: "15m"  
   
 - url: /events.html
   script: events.html
@@ -29,6 +80,9 @@ handlers:
 
 - url: /images
   static_dir: images
+  
+- url: /blog
+  static_dir: blog
 
 - url: /favicon.ico
   static_files: favicon.ico
@@ -48,3 +102,4 @@ handlers:
 
 - url: /.*
   script: 404.html
+ 
